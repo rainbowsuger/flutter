@@ -43,33 +43,28 @@ class MoviesViewState extends State<MoviesViewList> {
         itemCount: moviesList.count,
         itemBuilder: (BuildContext context, int index) {
           return new Container(
-            alignment: Alignment.topLeft,
-            child: new Row(
-              children:[
-                new Text("演员:"),
-                new ListView.builder(
-                  itemCount: moviesList.subjects[index]["casts"].length,
-                  itemBuilder: (BuildContext context, int index1) {
-                    return new Column(
-                      children: [
-                      Text('姓名：${moviesList.subjects[index]["casts"][index1]["name"]}'),
-                      Image.network(
-                          moviesList.subjects[index]["casts"][index1]["name"],
-                          fit: BoxFit.contain
-                      ),
-                      ]
-                    );
-                  }
-                ),
+//            alignment: Alignment.topLeft,
+              color:Color(0xff7a4f06),
+              padding:EdgeInsets.all(10.0),
+              child: new Card(
+                  elevation:5.0,
+                  child: new Column(
+                      children:[
+                        Text("电影名称：《${moviesList.subjects[index]["title"]}》",style:TextStyle(fontSize: 18,)),
+                        Text("原名：《${moviesList.subjects[index]["original_title"]}》",style:TextStyle(fontSize: 18,)),
+                        Text("评分：${moviesList.subjects[index]["rating"]["average"]}",style:TextStyle(fontSize: 18,color:Color(0xff7a4f06))),
+                        Text("电影类型：${moviesList.subjects[index]["genres"]}",style:TextStyle(fontSize: 18,)),
+                        Text("上映时间：${moviesList.subjects[index]["year"]}",style:TextStyle(fontSize: 18,)),
+                        Text("主演:${moviesList.subjects[index]["casts"][0]["name"]}",style:TextStyle(fontSize: 18,)),
+                        Image.network(
+                            moviesList.subjects[index]["images"]["small"],
+                            fit: BoxFit.contain
+                        ),
 
-                Image.network(
-                    moviesList.subjects[index]["casts"],
-                    fit: BoxFit.contain
-                ),
-                new Text("电影名称：${moviesList.subjects[index]["title"]}"),
-                new Text("类型：${moviesList.subjects[index]["genres"]}"),
-              ]
-            )
+                      ]
+                  )
+              )
+
           );
         }
     );
